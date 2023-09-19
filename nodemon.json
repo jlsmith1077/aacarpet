@@ -1,0 +1,9 @@
+{
+    "env": {
+        "MONGO_ATLAS_PW": "i6PH9hEVERYbIxcf",
+        "JWT_KEY": "janetclairjermainladellangelhenriettajermainjames",
+        "TWILIO_ACCOUNT_SID": "ACe4f1bd2f1f4902c056234ecf22144670",
+        "TWILIO_AUTH_TOKEN": "b079f870ffcef774cadc44fa00f5c168",
+        "MY_PHONE_NUMBER": "+8565171368"
+    }
+}

@@ -1,0 +1,55 @@
+<form [formGroup]="invoiceForm" id="bottom">
+    <div class="bottomdivider">
+        <div class="description" id="description">
+            <div >
+                <label for="description" >Description</label>
+                <mat-form-field>
+                    <input matInput
+                    type="text"
+                    formControlName="description">
+                </mat-form-field>
+            </div>
+        </div>
+        <div class="test">
+            <div class="quantity">
+                <label for="rate">Rate</label>
+                <mat-form-field>
+                    <input matInput
+                    type="text"
+                    formControlName="rate">
+                </mat-form-field>
+            </div>
+        </div>
+        <div class="test">
+            <div class="quantity">
+                <label for="quantity">Quantity</label>
+                <mat-form-field>
+                    <input matInput
+                    type="text"
+                    formControlName="quantity">
+                </mat-form-field>
+            </div>
+        </div>
+        <div class="test">
+            <div class="quantity">
+                <label for="tax">Tax</label>
+                <mat-form-field>
+                    <input matInput
+                    type="text"
+                    formControlName="tax">
+                </mat-form-field>
+            </div>
+        </div>
+        <div class="test"> 
+            <div class="quantity">
+                <label for="amount">Amount</label>
+                <mat-form-field>
+                    <input matInput
+                    type="text"
+                    formControlName="amount">
+                </mat-form-field>
+            </div>
+        </div>
+        </div>
+    </form>
+    

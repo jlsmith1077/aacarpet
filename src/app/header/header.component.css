@@ -1,0 +1,21 @@
+mat-toolbar {
+    background-color: rgb(241, 57, 57);
+    width: 100%;
+    height: 10%;
+}
+span {
+    flex: 1 1 auto;
+}
+/* @media screen and (orientation: portrait) {
+    mat-toolbar {
+        font-size: 30pt;
+        width: 100%;
+    }
+}
+@media screen and (orientation: portrait) {
+    .close button {
+        font-size: 30pt;
+        width: 100%;
+        height: fit-content;
+    }
+} */

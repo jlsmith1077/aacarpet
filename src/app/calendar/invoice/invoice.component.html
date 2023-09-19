@@ -1,0 +1,185 @@
+<div class="fillHeight">
+<mat-toolbar>
+    <section>
+        A & A Carpet Cleaning Inc.
+    </section>
+    <span></span>
+    <section >
+        856-728-4266
+        </section>
+        <span></span>
+    <section>
+        Invoice
+    </section>        
+</mat-toolbar>
+<mat-card>
+    <div class="topdivider">
+        <h2>
+            1705 Biden Lane Williamstown, NJ 08094
+        </h2>
+        <span></span>
+        <h2>
+            Invoice: {{invoiceNumber}}
+        </h2>
+    </div> 
+    <!-- ______________________________________________________________    -->
+
+    <form [formGroup]="invoiceFormTop">        
+        <div class="topdivider">
+            <mat-form-field>
+                <label for="bill_to">Bill To:</label>
+                <textarea
+                    maxLength="500"
+                    cdkTextareaAutosize
+                    #bill_to
+                    matInput
+                    type="text"
+                    formControlName="bill_to"
+                ></textarea>
+            </mat-form-field>
+            <span></span>
+            <mat-form-field>
+                <label for="ship_to">Ship To:</label>
+                <textarea
+                    maxLength="500"
+                    cdkTextareaAutosize
+                    #ship_to
+                    matInput
+                    type="text"
+                    formControlName="ship_to"
+                ></textarea>
+            </mat-form-field>
+    </div>
+</form>
+<!-- mid form------------------------- -->
+<form [formGroup]="invoiceFormMid" id="mid" class="middivider">  
+        <mat-form-field >
+            <div class="labelInput">
+                <label for="po_number">P.O. NUMBER</label>
+                    <textarea                
+                        maxLength="500"
+                        cdkTextareaAutosize
+                        #po_number
+                        matInput
+                        type="text"
+                        formControlName="po_number"
+                    ></textarea>
+            </div>
+        </mat-form-field>
+        <mat-form-field>
+            <div class="labelInput">
+                <label for="terms">TERMS</label>
+                <textarea
+                    maxLength="500"
+                    cdkTextareaAutosize
+                    #terms
+                    matInput
+                    type="text"
+                    formControlName="terms"
+                ></textarea>
+            </div>
+        </mat-form-field>
+        <mat-form-field >
+            <div class="labelInput">
+                <label for="project">PROJECT</label>
+                <textarea
+                    maxLength="500"
+                    cdkTextareaAutosize
+                    #project
+                    matInput
+                    type="text"
+                    formControlName="project"
+                ></textarea>
+            </div>
+        </mat-form-field>
+</form> 
+   <!--  Last Form-->
+    <div class="tax">
+        <button type="submit" mat-raised-button style="background-color: green; color: white; border-color: red; border-width: .2em; border-style: dotted; text-align: center; padding: 0em; font-size: smaller; width: fit-content; font-style: oblique;" (click)="calculateTax()">Calculate</button>
+        <mat-checkbox (change)="noTax($event)" #matCheckTax labelPosition="before">
+            No Tax
+        </mat-checkbox>
+    </div>
+ 
+   <form [formGroup]="invoiceFormBottom">
+       <ng-container *ngFor="let FormGroupEl of invoiceFormBottom.controls; let i = index">
+                    <div #formGroup [formGroup]="FormGroupEl"  class="bottomdivider" *ngIf="FormGroupEl.get('description').value != null">
+                        <div style="display: flex; flex-direction: column; margin: 0em; padding: 0em; border: 0em; width: fit-content; height: fit-content;">
+                            <button type="button" style="background-color: green; margin: 0em; padding: 0em; border: 0em; width: fit-content; height: fit-content; text-align: center;" (click)="addGroupHtml(FormGroupEl, invoiceFormBottom.controls.length)">
+                                <mat-icon>add</mat-icon></button>
+                            <button type="button" style="background-color: red; margin: 0em; padding: 0em; border: 0em; width: fit-content; height: fit-content; text-align: center;" (click)="removeGroup(i)">
+                                <mat-icon>delete</mat-icon>
+                            </button>
+                        </div>
+                    <mat-form-field class="test">
+                        <div class="labelInput" style="margin-top: .2em">
+                            <label for="description" style="max-width: 100%;">Description</label>
+                             <textarea
+                                maxLength="500"
+                                cdkTextareaAutosize
+                                 matInput
+                                 type="text"
+                                 formControlName="description"
+                             ></textarea>
+                        </div>
+                     </mat-form-field>
+                    <mat-form-field class="test">
+                        <div class="labelInput">
+                            <label for="rate">Rate</label>
+                            <input
+                                matInput
+                                type="text"
+                                formControlName="rate">
+                        </div>
+                    </mat-form-field>
+                    <mat-form-field class="test">
+                        <div class="labelInput">
+                            <label for="quantity">Qty</label>
+                            <input matInput
+                            type="text"
+                            formControlName="quantity">
+                        </div>
+                    </mat-form-field>
+                    <mat-form-field class="amount">
+                        <div class="labelInput">
+                            <label for="amount">Amount</label>
+                            <input matInput
+                                #taxInput                       
+                                (keyup.enter)="calculateTax()"
+                                type="text"
+                                formControlName="amount">
+                        </div>
+                        </mat-form-field>
+                        <mat-form-field class="test" style="border-right: solid">
+                            <div class="labelInput">
+                                <label for="quantity">Tax</label>
+                                <input matInput
+                                    type="text"
+                                    formControlName="tax"
+                                    #taxInput
+                                    >
+                            </div>                                                    
+                        </mat-form-field>
+                                </div>
+                </ng-container>
+    </form>
+   <form [formGroup]="totalAmountForm" class="totals">
+       <mat-form-field>
+           <label for="totalTax" style="margin-bottom: .5em;">Total Tax</label>
+           <input matInput
+           type="text"
+           formControlName="totalTax">
+       </mat-form-field>
+       <mat-form-field>
+           <label for="total" style="margin-bottom: .5em;">Total Price</label>
+           <input matInput
+           type="text"
+           formControlName="totalAmount">
+       </mat-form-field>
+   </form>   
+       <mat-card-actions id="actions">
+           <button mat-raised-button color="accent" (click)="printPage()"> Print Invoice</button>
+           <button mat-raised-button primary routerLink="/home">Home</button>
+       </mat-card-actions>
+</mat-card>
+</div>

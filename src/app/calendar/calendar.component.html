@@ -1,0 +1,32 @@
+<div class="container">
+    <mat-card class="calendar">
+        <mat-card-title>Schedule Your Job</mat-card-title>
+        <mat-card-subtitle *ngIf="isDateSelected">
+            Complete Fields Below Then Click Add Job
+        </mat-card-subtitle>
+        <mat-card-content>
+          <div class="dates">
+            <mat-form-field appearance="fill" class="dateRange">
+              <mat-label>Enter date range/click calendar icon</mat-label>
+              <mat-date-range-input [rangePicker]="rangePicker">
+                <input #dateRangeStart (dateChange)="dateChanged(dateRangeStart, dateRangeEnd)" matStartDate placeholder="ex. 10/08/2021">
+                <input #dateRangeEnd (dateChange)="dateChanged(dateRangeStart, dateRangeEnd)" matEndDate placeholder="10/15/2021">
+              </mat-date-range-input>
+              <mat-datepicker-toggle matSuffix [for]="rangePicker">Click to select job date/s</mat-datepicker-toggle>
+              <mat-date-range-picker #rangePicker>
+                <mat-date-range-picker-actions>
+                  <button class="calendarApply" mat-button matDateRangePickerCancel>Cancel</button>
+                  <button class="calendarApply" mat-raised-button color="primary" (click)="dateChanged(dateRangeStart, dateRangeEnd)" matDateRangePickerApply>Apply</button>
+                </mat-date-range-picker-actions>
+              </mat-date-range-picker>
+            </mat-form-field>
+            <p  class="timeFrame" *ngIf="isDateSelected">
+              <app-add-job [dateStart]="dateRangeStart.value" [dateEnd]="dateRangeEnd.value" [dateRangeList]="dateRangeList" [isDateSelected]="changeIsdateselected"></app-add-job>
+            </p>  
+
+          </div>
+        </mat-card-content>
+      </mat-card >      
+      <!-- ----------------------------                    Showing Jobs                       -->
+      <app-all-jobs [isDateSelected]="isDateSelected" [todayJobsBool]="todayJobsBool" [allJobsBool]="allJobsBool" [completeJobsBool]="completeJobsBool"></app-all-jobs>
+</div>

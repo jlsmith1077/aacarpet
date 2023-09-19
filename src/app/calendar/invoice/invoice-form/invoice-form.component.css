@@ -1,0 +1,12 @@
+.quantity {
+    padding: .2em;
+}
+label {
+    width: 100%;
+}
+.form {
+    height: 100%;
+    width: 100%;
+    appearance: fill;
+    overflow: scroll;
+}

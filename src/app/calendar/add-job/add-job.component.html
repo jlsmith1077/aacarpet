@@ -1,0 +1,347 @@
+<textarea [autofocus]="false" #textareaSelectJob [(ngModel)]="textAreaValue" (ngModelChange)="textAreaEmpty()" placeholder="TYPE SERVICES NEEDED HERE OR SELECT SERVICES BELOW"  matInput style="height: fit-content; border: .1em; border-radius: .3em; border-style: solid; background-color: rgb(245, 245, 143); margin-left: .5em; width: 75%">
+</textarea>
+<form class="addJobForm" [formGroup]="addJobForm" (ngSubmit)="submit()">
+  <div style="appearance: fill; margin-bottom: .2em !important; padding-top: 0em !important; border-radius: .3em; background-color: rgba(0,0,0,.04);"> 
+    <h4>Select Services</h4>  
+    <mat-select  #matSelectMain autosize multiple>
+      <mat-toolbar  class="close">
+        <button style="text-align: center; font-style: italic;"  color="warn" (click)="matSelectMain.close()">close panel</button>
+      </mat-toolbar>
+        <mat-option tabindex="-1" #matOptionCarpet (click)="jobType(matOptionCarpet.selected, matOptionCarpet.value)" value="Carpet Cleaning">
+          Carpet Cleaning
+        </mat-option>
+        <mat-select autosize #matSelectCarpet color="accent" multiple>
+          <div  (mouseleave)="matSelectCarpet.close()">
+            <mat-optgroup *ngFor="let carpetworkEl of carpetwork" [label]="carpetworkEl.name">
+              <button style="text-align: center;" color="warn" (click)="matSelectCarpet.close()">close panel</button>
+              <mat-option #matOptionCarpetJob (click)="createDescription(matOptionCarpet.value, carpetworkEl.name, numberEl, matOptionCarpetJob.selected, i)" *ngFor="let numberEl of numbers; let i=index" [value]="numberEl">
+                {{numberEl}}&nbsp;-&nbsp; {{carpetworkEl.name}}
+              </mat-option>
+            </mat-optgroup>
+          </div>          
+        </mat-select>
+        
+        <mat-option #matOptionJanitorial (click)="jobType(matOptionJanitorial.selected, matOptionJanitorial.value)" value="Janitorial">
+          Janitorial
+        </mat-option>
+        <mat-select autosize #matSelectJanitorial color="accent" multiple>
+          <div  (mouseleave)="matSelectJanitorial.close()">
+            <mat-optgroup *ngFor="let janitorialworkEl of janitorialwork" [label]="janitorialworkEl.name">
+              <button style="text-align: center;" color="warn" (click)="matSelectJanitorial.close()">close panel</button>
+              <mat-option #matOptionJanitorialJob (click)="createDescription(matSelectJanitorial.value, janitorialworkEl.name, numberEl, matOptionJanitorialJob.selected, i)" *ngFor="let numberEl of numbers; let i=index" [value]="numberEl">
+              
+                {{numberEl}}&nbsp;-&nbsp; {{janitorialworkEl.name}}
+              </mat-option>
+            </mat-optgroup>
+          </div>          
+        </mat-select>
+        
+        <mat-option #matOptionGrout (click)="jobType(matOptionGrout.selected, matOptionGrout.value)" value="Tile Cleaning">
+          Grout Cleaning
+        </mat-option>
+        <mat-select autosize #matSelectTile color="accent" multiple>
+          <div  (mouseleave)="matSelectTile.close()">
+            <mat-optgroup *ngFor="let floorWorkEl of floorWork" [label]="floorWorkEl.name">
+              <button style="text-align: center;" color="warn" (click)="matSelectTile.close()" >close panel</button>
+              <mat-option #matOptionTileJob (click)="createDescription(matOptionGrout.value, floorWorkEl.name, numberEl, matOptionTileJob.selected, i)"  *ngFor="let numberEl of numbers; let index = i" [value]="numberEl">
+                {{numberEl}}&nbsp;-&nbsp; {{floorWorkEl.name}}
+              </mat-option>
+            </mat-optgroup>
+          </div>          
+        </mat-select>
+        
+        <mat-option #matOptionUpholstery (click)="jobType(matOptionUpholstery.selected, matOptionUpholstery.value)" value="Upholstery Cleaning">
+          Upholstery Cleaning
+        </mat-option>
+        <mat-select autosize #matSelectUpholstery color="accent" multiple>
+          <div  (mouseleave)="matSelectUpholstery.close()">
+            <mat-optgroup *ngFor="let upholsteryCleaningEl of upholsteryCleaning" [label]="upholsteryCleaningEl.name">
+              <button style="text-align: center;" color="warn" (click)="matSelectUpholstery.close()" >close panel</button>
+              <mat-option #matOptionUpholsteryJob (click)="createDescription(matOptionUpholstery.value, upholsteryCleaningEl.name, numberEl, matOptionUpholsteryJob.selected, i)" #matOptionUpholsteryJob? *ngFor="let numberEl of numbers; let index = i" [value]="numberEl">
+                {{numberEl}} &nbsp;-&nbsp;{{upholsteryCleaningEl.name}}
+              </mat-option>
+            </mat-optgroup>
+          </div>          
+        </mat-select>
+
+
+        <mat-option #matOptionRestoration (click)="jobType(matOptionRestoration.selected, matOptionRestoration.value)" value="Flood Restoration">
+          Flood Restoration
+        </mat-option>
+        <mat-select autosize #matSelectRestoration color="accent" multiple>
+          <div  (mouseleave)="matSelectRestoration.close()">
+            <mat-optgroup *ngFor="let restorationEl of restoration" [label]="restorationEl.name">
+              <button style="text-align: center;" color="warn" (click)="matSelectRestoration.close()">close panel</button>
+              <mat-option #matOptionRestorationJob (click)="createDescription(matOptionRestoration.value, restorationEl.name, numberEl, matOptionRestorationJob.selected, i)" #matOptionRestorationJob? *ngFor="let numberEl of numbers; let index = i" [value]="numberEl">
+                {{numberEl}} rooms &nbsp;-&nbsp;{{restorationEl.name}}
+              </mat-option>
+            </mat-optgroup>
+          </div>          
+        </mat-select>
+        
+        <mat-option #matOptionCement (click)="jobType(matOptionCement.selected, matOptionCement.value)" value="Cement Basement">
+          Cement Basement
+        </mat-option>
+        <mat-select autosize #matSelectBasement color="accent" multiple>
+          <div  (mouseleave)="matSelectBasement.close()">
+            <mat-optgroup *ngFor="let cementbasementEl of cementbasement" [label]="cementbasementEl.name">
+              <button style="text-align: center;" color="warn" (click)="matSelectBasement.close()">close panel</button>
+              <mat-option #matOptionBasementJob (click)="createDescription(matSelectBasement.value, cementbasementEl.name, numberEl, matOptionBasementJob.selected, i)" #matOptionRestorationJob *ngFor="let numberEl of numbers; let index = i" [value]="numberEl">
+                {{numberEl}} &nbsp;-&nbsp;{{cementbasementEl.name}}
+              </mat-option>
+            </mat-optgroup>
+          </div>          
+        </mat-select>
+
+        <mat-option #matOptionStripping (click)="jobType(matOptionStripping.selected, matOptionStripping.value)" value="Stripping & Waxing">
+          Stripping & Waxing
+        </mat-option>
+        <mat-select autosize #matSelectStripping color="accent" multiple>
+          <div  (mouseleave)="matSelectStripping.close()">
+            <mat-optgroup *ngFor="let strippingWaxingEl of strippingWaxing" [label]="strippingWaxingEl.name">
+              <button style="text-align: center;" color="warn" (click)="matSelectStripping.close()">close panel</button>
+              <mat-option  #matOptionStrippingJob (click)="createDescription(matOptionStripping.value, strippingWaxingEl.name, numberEl, matOptionStrippingJob.selected, i)" *ngFor="let numberEl of numbers; let index = i" [value]="numberEl">
+                {{numberEl}}&nbsp;-&nbsp;{{strippingWaxingEl.name}}
+              </mat-option>
+            </mat-optgroup>
+          </div>          
+        </mat-select>
+        <mat-option #matOptionPressureWash (click)="jobType(matOptionPressureWash.selected, matOptionPressureWash.value)" value="Pressure Washing">
+          Pressure Washing
+        </mat-option>
+        <mat-select autosize #matSelectPressureWash color="accent" multiple>
+          <div  (mouseleave)="matSelectPressureWash.close()">
+            <mat-optgroup *ngFor="let pressureWashEl of pressureWash" [label]="pressureWashEl.name">
+              <button style="text-align: center;" color="warn" (click)="matSelectPressureWash.close()">close panel</button>
+              <mat-option #matOptionPressureWashJob (click)="createDescription(matSelectPressureWash.value, pressureWashEl.name, numberEl, matOptionPressureWashJob.selected, i)" #matOptionPressureWashJob?  *ngFor="let numberEl of numbers; let index = i" [value]="numberEl">
+                {{numberEl}}&nbsp;-&nbsp;{{pressureWashEl.name}}
+              </mat-option>
+            </mat-optgroup>
+          </div>          
+        </mat-select>
+        <mat-option  #matOptionOther (click)="jobType(matOptionOther.selected, matOptionOther.value)" value="Other">
+          Other
+        </mat-option>
+        <footer class="close">
+          <button (click)="matSelectMain.close()" color="warn" mat-raised-button>close panel</button>
+        </footer>
+    </mat-select>
+  </div>
+
+    <mat-form-field style="margin-bottom: .2em !important;" appearance="fill">
+      <mat-label>Enter your email</mat-label>
+      <input matInput placeholder="Optional" id="email" formControlName="email">
+    </mat-form-field>
+    
+<mat-form-field style="margin-bottom: .2em !important;" appearance="fill">
+  <mat-label>Enter Company Name</mat-label>
+  <input matInput placeholder="Company/Name" id="name" formControlName="name">
+</mat-form-field>
+<mat-form-field style="margin-bottom: .2em !important;" appearance="fill">
+  <mat-label>Enter job's address</mat-label>
+  <input matInput placeholder="Address" id="address" formControlName="address">
+</mat-form-field>
+<mat-form-field style="margin-bottom: .2em !important;" appearance="fill">
+      <mat-label>Job's Contact Number</mat-label>
+      <input matInput placeholder="Contact # for Job" id="quantity" formControlName="phoneNumber">
+    </mat-form-field>
+
+    <button [disabled]="!addJobForm.valid" class="addJob" style="text-align: center;" mat-raised-button color="primary" type="submit">Add Job</button>
+  </form>
+
+  <mat-card
+    class="description"
+    *ngIf="
+      descriptionBool && descriptionCarpet.length > 0
+      || descriptionBool && descriptionJanitorial.length > 0
+      || descriptionBool &&  descriptionTile.length > 0
+      || descriptionBool &&  descriptionRestoration.length > 0
+      || descriptionBool &&  descriptionBasement.length > 0
+      || descriptionBool &&  descriptionStripping.length > 0
+      || descriptionBool &&  descriptionPressureWashing.length > 0
+      || descriptionBool && descriptionUpholstery.length > 0
+      || descriptionOther.length > 0 
+    "
+    [ngStyle]="{'background-color': turnGreen ? 'rgba(171, 248, 175, 0.5)' : 'rgba(247, 233, 154, 0.5)' }"
+    >
+    <button style="display: flex; align-items: flex-end; width: fit-content; margin: .5em; border: 0em; padding: 0em;" (click)="closeServicesChosen()">
+      <mat-icon class="icon">close</mat-icon>
+    </button>
+    <h2 *ngIf="turnGreen">JOB HAS BEEN SCHEDULED FOR {{dateStart | date:'EEEE, MMMM d':'UTC'+ offset }} THANK YOU!</h2>
+    <mat-card-title class="servicesJob">Services for Job</mat-card-title>
+    <mat-card-content>
+      <mat-card-subtitle *ngIf="typedInWork.length > 0">Described Job</mat-card-subtitle>
+      <section *ngIf="typedInWork.length > 0">
+        <article  *ngFor="let descriptionEl of typedInWork">
+          {{descriptionEl.name}} - {{descriptionEl.quantity}} -&nbsp; {{decriptionTypeIn}}
+          <mat-label>Apt#</mat-label>
+          <input style="width: 6em; padding: .3em; margin: 0em;" 
+                #aptTypedInWork      
+                type="text" 
+                placeholder="ADD APT #/S" 
+                mat-input
+                >
+        </article>
+      </section>
+      <mat-card-subtitle *ngIf="descriptionCarpet.length > 0">Carpet Cleaning</mat-card-subtitle>
+      <section *ngIf="descriptionCarpet.length > 0">
+        <article  *ngFor="let descriptionEl of descriptionCarpet; let index = i;">
+          {{descriptionEl.quantity}} -&nbsp; {{descriptionEl.description}}
+          <mat-label>Apt#</mat-label>
+          <div>
+            <input #inputValue style="width: 6em; padding: .3em; margin: 0em;" 
+                    type="text" 
+                    placeholder="ADD APT #/S" 
+                    mat-input
+                    #aptCarpet
+                    (mouseout)="addCarpetAptNum(descriptionEl.quantity, descriptionEl.index, inputValue.value)"
+                >
+            <button mat-button-raised style="margin: 0em; border: 0em; padding: .1em" (click)="addCarpetAptNum(descriptionEl.quantity, descriptionEl.index, inputValue.value)"><mat-icon style="color: green;">add_circle_outline</mat-icon></button>
+
+          </div>
+        </article>
+      </section>
+      <mat-card-subtitle *ngIf="descriptionJanitorial.length > 0">Janitorial</mat-card-subtitle>
+      <section *ngIf="descriptionJanitorial.length > 0">
+        <article  *ngFor="let descriptionEl of descriptionJanitorial; let index = i;">
+          {{descriptionEl.quantity}} -&nbsp; {{descriptionEl.description}}
+          <div>
+            <mat-label>Apt#</mat-label>
+            <input #inputValue2 style="width: 6em; padding: .3em; margin: 0em;" 
+                    type="text" 
+                    placeholder="ADD APT #/S" 
+                    mat-input
+                    #aptJanitorial
+                    (mouseout)="addCarpetAptNum(descriptionEl.quantity, descriptionEl.index, inputValue2.value)"
+              >
+              <button mat-button-raised style="margin: 0em; border: 0em; padding: .1em" (click)="addCarpetAptNum(descriptionEl.quantity, descriptionEl.index, inputValue2.value)"><mat-icon style="color: green;">add_circle_outline</mat-icon></button>
+
+          </div>
+        </article>
+      </section>
+      <mat-card-subtitle *ngIf="descriptionTile.length > 0">Grout Cleaning</mat-card-subtitle>
+      <section *ngIf="descriptionTile.length > 0">
+        <article  *ngFor="let descriptionEl of descriptionTile; let index = i;">
+          {{descriptionEl.quantity}} -&nbsp; {{descriptionEl.description}}
+          <div>
+            <mat-label>Apt#</mat-label>
+            <input #inputValue3 style="width: 6em; padding: .3em; margin: 0em;" 
+                    type="text" 
+                    placeholder="ADD APT #/S" 
+                    mat-input
+                    #aptGrout
+                    (mouseout)="addCarpetAptNum(descriptionEl.quantity, descriptionEl.index, inputValue3.value)"
+                >
+                <button mat-button-raised style="margin: 0em; border: 0em; padding: .1em" (click)="addCarpetAptNum(descriptionEl.quantity, descriptionEl.index, inputValue3.value)"><mat-icon style="color: green;">add_circle_outline</mat-icon></button>
+
+          </div>
+        </article>
+      </section>
+      <mat-card-subtitle *ngIf="descriptionUpholstery.length > 0">Upholstery Cleaning</mat-card-subtitle>
+      <section *ngIf="descriptionUpholstery.length > 0">
+        <article  *ngFor="let descriptionEl of descriptionUpholstery; let index = i;">
+          {{descriptionEl.quantity}} -&nbsp; {{descriptionEl.description}}
+          <div>
+            <mat-label>Apt#</mat-label>
+            <input #inputValue4 style="width: 6em; padding: .3em; margin: 0em;" 
+                    type="text" 
+                    placeholder="ADD APT #/S" 
+                    mat-input
+                    #aptUpholstery
+                    (mouseout)="addCarpetAptNum(descriptionEl.quantity, descriptionEl.index, inputValue4.value)"
+                >
+                <button mat-button-raised style="margin: 0em; border: 0em; padding: .1em" (click)="addCarpetAptNum(descriptionEl.quantity, descriptionEl.index, inputValue4.value)"><mat-icon style="color: green;">add_circle_outline</mat-icon></button>
+
+          </div>
+
+        </article>
+      </section>
+      <mat-card-subtitle *ngIf="descriptionRestoration.length > 0">Flood Restoration</mat-card-subtitle>
+      <section *ngIf="descriptionRestoration.length > 0">
+        <article  *ngFor="let descriptionEl of descriptionRestoration"; let index = i;>
+          {{descriptionEl.quantity}} -&nbsp; {{descriptionEl.description}}
+          <div>
+            <mat-label>Apt#</mat-label>
+            <input #inputValue5 style="width: 6em; padding: .3em; margin: 0em;" 
+                    type="text" 
+                    placeholder="ADD APT #/S" 
+                    mat-input
+                    #aptRestoration
+                    (mouseout)="addCarpetAptNum(descriptionEl.quantity, descriptionEl.index, inputValue5.value)"
+                >
+                <button mat-button-raised style="margin: 0em; border: 0em; padding: .1em" (click)="addCarpetAptNum(descriptionEl.quantity, descriptionEl.index, inputValue5.value)"><mat-icon style="color: green;">add_circle_outline</mat-icon></button>
+
+          </div>
+        </article>
+      </section>
+      <mat-card-subtitle *ngIf="descriptionBasement.length > 0">Cement Basement</mat-card-subtitle>
+      <section *ngIf="descriptionBasement.length > 0">
+        <article  *ngFor="let descriptionEl of descriptionBasement"; let index = i;>
+          {{descriptionEl.quantity}} - &nbsp; {{descriptionEl.description}}
+          <div>
+            <mat-label>Apt#</mat-label>
+            <input #inputValue6 style="width: 6em; padding: .3em; margin: 0em;" 
+                    type="text" 
+                    placeholder="ADD APT #/S" 
+                    mat-input
+                    #aptCementBasement
+                    (mouseout)="addCarpetAptNum(descriptionEl.quantity, descriptionEl.index, inputValue6.value)"
+                >
+                <button mat-button-raised style="margin: 0em; border: 0em; padding: .1em" (click)="addCarpetAptNum(descriptionEl.quantity, descriptionEl.index, inputValue6.value)"><mat-icon style="color: green;">add_circle_outline</mat-icon></button>
+
+          </div>
+        </article>
+      </section>
+      <mat-card-subtitle *ngIf="descriptionStripping.length > 0">Stripping & Waxing</mat-card-subtitle>
+      <section *ngIf="descriptionStripping.length > 0">
+        <article  *ngFor="let descriptionEl of descriptionStripping; let index = i;">
+          {{descriptionEl.quantity}} - &nbsp; {{descriptionEl.description}}
+          <div>
+            <mat-label>Apt#</mat-label>
+            <input #inputValue7 style="width: 6em; padding: .3em; margin: 0em;" 
+                    type="text" 
+                    placeholder="ADD APT #/S" 
+                    mat-input
+                    #aptStrippingWax
+                    (mouseout)="addCarpetAptNum(descriptionEl.quantity, descriptionEl.index, inputValue7.value)"
+                >
+                <button mat-button-raised style="margin: 0em; border: 0em; padding: .1em" (click)="addCarpetAptNum(descriptionEl.quantity, descriptionEl.index, inputValue7.value)"><mat-icon style="color: green;">add_circle_outline</mat-icon></button>
+
+          </div>
+        </article>
+      </section>
+      <mat-card-subtitle *ngIf="descriptionPressureWashing.length > 0">Pressure Washing</mat-card-subtitle>
+      <section *ngIf="descriptionPressureWashing.length > 0">
+        <article  *ngFor="let descriptionEl of descriptionPressureWashing; let index = i;">
+          {{descriptionEl.quantity}} - &nbsp; {{descriptionEl.description}}
+          <div>
+            <mat-label>Apt#</mat-label>
+            <input #inputValue8 style="width: 6em; padding: .3em; margin: 0em;" 
+                    type="text" 
+                    placeholder="ADD APT #/S" 
+                    mat-input
+                    #aptPressureWash
+                    (mouseout)="addCarpetAptNum(descriptionEl.quantity, descriptionEl.index, inputValue8.value)"
+                >
+                <button mat-button-raised style="margin: 0em; border: 0em; padding: .1em" (click)="addCarpetAptNum(descriptionEl.quantity, descriptionEl.index, inputValue8.value)"><mat-icon style="color: green;">add_circle_outline</mat-icon></button>
+
+          </div>
+        </article>
+      </section>
+      <mat-card-subtitle *ngIf="descriptionOther.length > 0">Other</mat-card-subtitle>
+      <section *ngIf="descriptionOther.length > 0">
+        <article  *ngFor="let descriptionEl of descriptionOther; let index = i;">
+          {{descriptionEl.quantity}} - &nbsp; {{descriptionEl.description}}
+          <mat-label>Apt#</mat-label>
+          <input #inputValue9 style="width: 6em; padding: .3em; margin: 0em;" 
+                  type="text" 
+                  placeholder="ADD APT #/S" 
+                  mat-input
+                  #aptOther
+                  (mouseout)="addCarpetAptNum(descriptionEl.quantity, descriptionEl.index, inputValue9.value)"
+              >
+        </article>
+      </section>
+      </mat-card-content>
+  </mat-card>
+ 

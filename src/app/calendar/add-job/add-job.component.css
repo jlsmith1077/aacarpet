@@ -1,0 +1,115 @@
+mat-card {
+    height: fit-content;
+}
+::ng-deep mat-select-panel {
+    height: fit-content;
+}
+mat-option {
+    display: flex;
+    flex-flow: row wrap;
+    font-weight: 550;
+}
+mat-optgroup {
+    font-weight: 550;
+}
+form {
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    margin: 1em;
+    margin-bottom: 0em;
+}
+section{
+    margin: 0%;
+    margin-bottom: 2em;
+}
+.description mat-label {
+    font-style: oblique;
+    font-weight: 500;
+}
+.alert  {
+    position: fixed;
+    top: 0;
+    right: 0.5rem;
+    border:1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 0.25rem;
+    padding: 2rem;
+    background: #fff;
+    color: #f65656;
+    box-shadow: 0 5px 10px -5px rgba(171, 248, 175, 0.5);
+    transition:  all 0.2s ease-in-out;
+    opacity: 0;
+  }
+  
+  .visible {
+    opacity: 1;
+    transform: translateY(1.25rem);
+  }
+.test{
+    height: 75vh;
+}
+.close {
+    position: relative;
+    float: left;
+    text-align: center;
+}
+::placeholder {
+    text-align: center;
+}
+input {
+    margin-bottom: 1em;
+}
+h3 {
+    margin-top: 2em;
+}
+.red {
+    background-color: rgb(243, 196, 196);
+}
+.green {
+    background-color: rgb(179, 243, 179);
+}
+.checkbox-section {
+    display: flex;
+    flex-flow: row wrap;
+    max-width: 100%;
+}
+.description {
+    border: solid;
+    border-color: white;
+    height: fit-content;
+    border-radius: .5em;
+    display: flex;
+    flex-flow: column wrap;
+    position: fixed;
+    top: 10%;
+    right: 0%;
+    height: fit-content;
+    width: 30%;
+    font-weight: 700;
+    z-index: 50;
+    padding: 1em;
+}
+::ng-deep .mat-datepicker-toggle-icon {
+    background: url("../../../assets/images/calendar-icon-294x300.jpg") no-repeat !important;
+}
+.radio-group {
+    position: fixed;
+    top: 8%;
+    right: 10%;
+    left: 30%;
+    height: fit-content;
+    width: 25%;
+    background: rgb(248, 246, 246);
+    font-weight: 700;
+    z-index: 50;
+    padding: 1em;
+}
+.radio-button {
+    margin: 0 10px;
+    padding: 5px;
+}
+form {
+    margin: 1em;
+    margin-bottom: 2em;
+    padding: 1em;
+}
